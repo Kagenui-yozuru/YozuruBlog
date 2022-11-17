@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    group:
+      "dev": devDB,devMVC
+    active: dev
+  main:
+    banner-mode: off
+
+
+logging:
+  level:
+    root: info

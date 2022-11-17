@@ -17,7 +17,12 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <jdbc.driverClassName>com.mysql.cj.jdbc.Driver</jdbc.driverClassName>
+        <jdbc.url>jdbc:mysql://localhost:3306/yozuru_blog?characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC</jdbc.url>
+        <jdbc.username>root</jdbc.username>
+        <jdbc.password>123456</jdbc.password>
     </properties>
+
 
     <dependencyManagement>
         <dependencies>
@@ -43,6 +48,34 @@
 
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <!--这个属性打开后就可以解析resource里的内容了-->
+                    <useDefaultDelimiters>true</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
 
 
 </project>
