@@ -1,9 +1,8 @@
 package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.entity.Article;
-import com.yozuru.domain.vo.HotArticlesVo;
-import com.yozuru.service.ArticleService;
+import com.yozuru.domain.vo.GetCategoryListVo;
+import com.yozuru.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,17 +13,15 @@ import java.util.List;
 /**
  * @author Yozuru
  */
-
 @RestController
-@RequestMapping("/article")
-public class ArticleController {
+@RequestMapping("/category")
+public class CategoryController {
 
     @Autowired
-    private ArticleService articleService;
+    private CategoryService categoryService;
 
-    @GetMapping("/hotArticleList")
-    public ResponseResult<List<HotArticlesVo>> getList(){
-        return articleService.hotArticlesList();
+    @GetMapping("/getCategoryList")
+    public ResponseResult<List<GetCategoryListVo>> getCategoryList(){
+       return categoryService.getCategoryList();
     }
 }
-

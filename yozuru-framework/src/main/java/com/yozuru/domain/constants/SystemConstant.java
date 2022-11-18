@@ -17,5 +17,13 @@ public class SystemConstant {
      * 表示热门文章的展示条数
      */
     public static final Integer HOT_ARTICLES_LIST_SIZE = 10;
+    /**
+     * 表示分组为正常状态
+     */
+    public static final Integer CATEGORY_STATUS_NORMAL = 0;
+    /**
+     * 表示分组为禁用状态
+     */
+    public static final Integer CATEGORY_STATUS_FORBIDDEN = 1;
 
 }
