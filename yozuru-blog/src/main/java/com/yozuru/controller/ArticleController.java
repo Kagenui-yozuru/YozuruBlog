@@ -2,7 +2,9 @@ package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.entity.Article;
+import com.yozuru.domain.vo.ArticleListVo;
 import com.yozuru.domain.vo.HotArticlesVo;
+import com.yozuru.domain.vo.PageVo;
 import com.yozuru.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,11 @@ public class ArticleController {
     @GetMapping("/hotArticleList")
     public ResponseResult<List<HotArticlesVo>> getList(){
         return articleService.hotArticlesList();
+    }
+
+    @GetMapping("/articleList")
+    public ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, Integer pageNum, Integer pageSize){
+        return articleService.getArticleList(categoryId, pageNum, pageSize);
     }
 }
 

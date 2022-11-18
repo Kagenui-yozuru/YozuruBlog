@@ -41,7 +41,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         List<Long> collect = articleList.stream()
                 .map(Article::getCategoryId)
                 .collect(Collectors.toList());
-        //根据查询分类id查询分类表 分组须为可用状态。
+        //根据分类id查询分类表 分组须为可用状态。
         LambdaQueryWrapper<Category> categoryWrapper = new LambdaQueryWrapper<>();
         categoryWrapper.in(Category::getId, collect)
                         .eq(Category::getStatus, SystemConstant.CATEGORY_STATUS_NORMAL)

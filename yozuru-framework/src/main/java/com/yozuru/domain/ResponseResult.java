@@ -3,13 +3,14 @@ package com.yozuru.domain;
 import com.yozuru.domain.enums.HttpCodeEnum;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author Yozuru
  */
 @Data
-public class ResponseResult<T> {
+public class ResponseResult<T> implements Serializable {
     private Integer code;
     private String message;
     private T data;
