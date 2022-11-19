@@ -31,4 +31,21 @@ public class ResponseResult<T> implements Serializable {
         responseResult.setData(data);
         return responseResult;
     }
+    public static <T> ResponseResult<T> success() {
+        return new ResponseResult<>();
+    }
+
+    public static <T> ResponseResult<T> errorResult(HttpCodeEnum httpCodeEnum) {
+        ResponseResult<T> responseResult = new ResponseResult<>();
+        responseResult.setMessage(httpCodeEnum.getMessage());
+        responseResult.setCode(httpCodeEnum.getCode());
+        return responseResult;
+    }
+
+    public static <T> ResponseResult<T> errorResult(Integer code, String message) {
+        ResponseResult<T> responseResult = new ResponseResult<>();
+        responseResult.setMessage(message);
+        responseResult.setCode(code);
+        return responseResult;
+    }
 }

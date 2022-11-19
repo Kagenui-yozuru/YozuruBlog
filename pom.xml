@@ -21,6 +21,8 @@
         <jdbc.url>jdbc:mysql://localhost:3306/yozuru_blog?characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true </jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password>123456</jdbc.password>
+        <redis.host>localhost</redis.host>
+        <redis.port>6379</redis.port>
     </properties>
 
 
@@ -47,6 +49,12 @@
             </dependency>
 
             <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.0</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>2.7.5</version>
@@ -68,6 +76,12 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>2.9.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alicp.jetcache</groupId>
+                <artifactId>jetcache-starter-redis</artifactId>
+                <version>2.6.3</version>
             </dependency>
 
         </dependencies>

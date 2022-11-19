@@ -1,0 +1,26 @@
+jetcache:
+  statIntervalMinutes: 10
+  areaInCacheName: false
+
+  local:
+    default:
+      type: linkedhashmap
+      keyConvertor: fastjson
+      valueEncoder: java
+      valueDecoder: java
+      limit: 100
+      keyPrefix: "sms_"
+      expireAfterAccessInMillis: 60000
+  remote:
+    blogLogin:
+      type: redis
+      host: ${redis.host}
+      port: ${redis.port}
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      expireAfterWriteInMillis: 86400000
+      poolConfig:
+        minIdle: 5
+        maxIdle: 20
+        maxTotal: 50

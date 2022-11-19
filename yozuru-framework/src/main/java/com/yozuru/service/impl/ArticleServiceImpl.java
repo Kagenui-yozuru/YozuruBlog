@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.SystemConstant;
 import com.yozuru.domain.entity.Category;
+import com.yozuru.domain.vo.ArticleDetailVo;
 import com.yozuru.domain.vo.ArticleListVo;
 import com.yozuru.domain.vo.HotArticlesVo;
 import com.yozuru.domain.vo.PageVo;
@@ -83,5 +84,18 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return ResponseResult.success(pageVo);
     }
 
+    @Override
+    public ResponseResult<ArticleDetailVo> getArticleDetail(Long id) {
+        Article article = getById(id);
+
+        LambdaQueryWrapper<Category> categoryWrapper = new LambdaQueryWrapper<>();
+        categoryWrapper.select(Category::getName)
+                .eq(Category::getId, article.getCategoryId());
+        Category category = categoryMapper.selectOne(categoryWrapper);
+        article.setCategoryName(category.getName());
+
+        ArticleDetailVo articleDetailVo = BeanCopyUtil.copyBean(article, ArticleDetailVo.class);
+        return ResponseResult.success(articleDetailVo);
+    }
 }
 
