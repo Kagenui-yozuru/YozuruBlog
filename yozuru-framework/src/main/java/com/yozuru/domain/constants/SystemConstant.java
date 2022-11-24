@@ -25,5 +25,10 @@ public class SystemConstant {
      * 表示分组为禁用状态
      */
     public static final Integer CATEGORY_STATUS_FORBIDDEN = 1;
+    /**
+     * 表示该评论为根评论
+     */
+    public static final Integer COMMENT_ROOT_ID=-1;
 
+    public static final Integer COMMENT_TYPE_ARTICLE=0;
 }

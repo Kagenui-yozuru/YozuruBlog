@@ -3,6 +3,7 @@ package com.yozuru.handler.exception;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.exception.BusinessException;
+import com.yozuru.exception.SystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,6 +16,12 @@ public class ProjectExceptionAdvice {
     public ResponseResult<Object> toBusinessException(BusinessException e){
         //记日志，找运维，找开发
         log.error("出现业务异常！{}",e.toString());
+        return ResponseResult.errorResult(e.getCode(), e.getMessage());
+    }
+    @ExceptionHandler({SystemException.class})
+    public ResponseResult<Object> toSystemException(SystemException e){
+        //记日志，找运维，找开发
+        log.error("出现系统异常！{}",e.toString());
         return ResponseResult.errorResult(e.getCode(), e.getMessage());
     }
     @ExceptionHandler
