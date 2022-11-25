@@ -13,12 +13,11 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         //从Security框架中Authentication权限信息获取当前登录用户的id。
         Long userId = null;
-        //try {
+        try {
             userId = SecurityUtils.getUserId();
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //    userId = -1L;//表示是自己创建
-        //}
+        } catch (ClassCastException e) {
+            userId = -1L;//表示是自己创建
+        }
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("createBy",userId , metaObject);
         this.setFieldValByName("updateTime", new Date(), metaObject);
@@ -28,6 +27,6 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         this.setFieldValByName("updateTime", new Date(), metaObject);
-        this.setFieldValByName(" ", SecurityUtils.getUserId(), metaObject);
+        this.setFieldValByName("updateBy", SecurityUtils.getUserId(), metaObject);
     }
 }

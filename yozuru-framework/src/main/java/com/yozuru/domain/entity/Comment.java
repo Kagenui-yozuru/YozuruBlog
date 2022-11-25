@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @AllArgsConstructor
 @TableName("yozuru_comment")
 public class Comment  {
-    
+    @TableId
     private Long id;
     //评论类型（0代表文章评论，1代表友链评论）
     private String type;

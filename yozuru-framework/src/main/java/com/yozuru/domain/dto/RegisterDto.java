@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 @NoArgsConstructor
-public class RegisterUserDto {
+public class RegisterDto {
     @NotNull
     @Length(min = 6,max = 14,message = "用户名的长度应为6~14字符")
     private String userName;

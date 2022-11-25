@@ -74,10 +74,20 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-
+        <!--缓存-->
         <dependency>
             <groupId>com.alicp.jetcache</groupId>
             <artifactId>jetcache-starter-redis</artifactId>
+        </dependency>
+        <!--数据校验-->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
         </dependency>
         <!--七牛云OSS-->
         <dependency>

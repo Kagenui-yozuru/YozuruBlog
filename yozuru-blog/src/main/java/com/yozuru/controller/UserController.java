@@ -1,6 +1,7 @@
 package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
+import com.yozuru.domain.dto.RegisterDto;
 import com.yozuru.domain.dto.UpdateUserInfoDto;
 import com.yozuru.domain.vo.UserInfoVo;
 import com.yozuru.service.UserService;
@@ -25,5 +26,9 @@ public class UserController {
     @PutMapping("/userInfo")
     public ResponseResult<Object> updateUserInfo(@RequestBody UpdateUserInfoDto userInfoDto){
         return userService.updateUserInfo(userInfoDto);
+    }
+    @PostMapping("/register")
+    public ResponseResult<Object> register(@RequestBody RegisterDto registerDto){
+        return userService.register(registerDto);
     }
 }

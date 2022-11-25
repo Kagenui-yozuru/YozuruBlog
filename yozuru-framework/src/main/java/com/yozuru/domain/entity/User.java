@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @TableName("sys_user")
 public class User implements Serializable{
     //主键
+    @TableId
     private Long id;
     //用户名
     private String userName;
@@ -38,7 +40,7 @@ public class User implements Serializable{
     //手机号
     private String phonenumber;
     //用户性别（0男，1女，2未知）
-    private String sex;
+    private Integer sex;
     //头像
     private String avatar;
 
