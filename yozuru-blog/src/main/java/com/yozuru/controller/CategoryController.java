@@ -1,5 +1,6 @@
 package com.yozuru.controller;
 
+import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.vo.GetCategoryListVo;
 import com.yozuru.service.CategoryService;
@@ -20,6 +21,7 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @SystemLog(businessName = "获得分类列表")
     @GetMapping("/getCategoryList")
     public ResponseResult<List<GetCategoryListVo>> getCategoryList(){
        return categoryService.getCategoryList();

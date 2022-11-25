@@ -1,5 +1,6 @@
 package com.yozuru.controller;
 
+import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.vo.ArticleDetailVo;
 import com.yozuru.domain.vo.ArticleListVo;
@@ -25,16 +26,18 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
+    @SystemLog(businessName = "获取热门文章列表")
     @GetMapping("/hotArticleList")
     public ResponseResult<List<HotArticlesVo>> getList(){
         return articleService.hotArticlesList();
     }
 
+    @SystemLog(businessName = "获取文章列表")
     @GetMapping("/articleList")
     public ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, Integer pageNum, Integer pageSize){
         return articleService.getArticleList(categoryId, pageNum, pageSize);
     }
-
+    @SystemLog(businessName = "获取文章详情")
     @GetMapping("/detail/{id}")
     public ResponseResult<ArticleDetailVo> getArticleDetail(@PathVariable("id") Long id){
         return articleService.getArticleDetail(id);

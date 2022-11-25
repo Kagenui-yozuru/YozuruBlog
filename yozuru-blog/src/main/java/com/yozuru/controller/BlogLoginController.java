@@ -1,5 +1,6 @@
 package com.yozuru.controller;
 
+import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.BlogLoginDto;
 import com.yozuru.domain.enums.HttpCodeEnum;
@@ -21,6 +22,7 @@ public class BlogLoginController {
     @Autowired
     BlogLoginService loginService;
 
+    @SystemLog(businessName = "用户登录")
     @PostMapping("/login")
     public ResponseResult<BlogUserLoginVo> login(@RequestBody BlogLoginDto loginDto){
         if (!Strings.hasText(loginDto.getUserName())){
@@ -29,6 +31,7 @@ public class BlogLoginController {
         return loginService.login(loginDto);
     }
 
+    @SystemLog(businessName = "用户登出")
     @PostMapping("/logout")
     public ResponseResult<Object> logout(){
         return loginService.logout();

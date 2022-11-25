@@ -35,7 +35,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     @CreateCache(area = "blogLogin", name = RedisConstant.BLOG_USER_KEY_PREFIX,cacheType = CacheType.REMOTE)
     private Cache<Long, LoginUser> userDetailCache;
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token=request.getHeader("token");
