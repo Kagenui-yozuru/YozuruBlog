@@ -24,3 +24,14 @@ jetcache:
         minIdle: 5
         maxIdle: 20
         maxTotal: 50
+    viewCount:
+      type: redis
+      host: ${redis.host}
+      port: ${redis.port}
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      poolConfig:
+        minIdle: 1
+        maxIdle: 3
+        maxTotal: 3

@@ -28,13 +28,15 @@ public class LogAspect {
     @Around("pointCut()")
     public Object printLog(ProceedingJoinPoint joinPoint) throws Throwable {
         //before
-        Object ret;
+        Object ret = null;
+        long startTime = 0;
         try {
             handleBefore(joinPoint);
+            startTime = System.currentTimeMillis();
             ret = joinPoint.proceed();
-            handleAfter(ret);
         } finally {
-            log.info("=============End=============" + System.lineSeparator());
+            long endTime = System.currentTimeMillis();
+            handleAfter(ret, endTime - startTime);
         }
         return ret;
     }
@@ -56,8 +58,10 @@ public class LogAspect {
         }
     }
 
-    private void handleAfter(Object ret) {
+    private void handleAfter(Object ret,long time) {
         log.info("Response Args  : {}", JSON.toJSONString(ret));
+        log.info("Time-Consuming : {} ms", time);
+        log.info("=============End=============" + System.lineSeparator());
     }
 
 }
