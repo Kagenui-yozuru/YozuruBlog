@@ -88,15 +88,21 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 .peek(commentVo -> {
                     LambdaQueryWrapper<User> queryWrapper1 = new LambdaQueryWrapper<>();
                     //只返回需要的字段，降低数据库传输压力
-                    queryWrapper1.select(User::getNickName)
+                    queryWrapper1.select(User::getNickName,User::getAvatar)
                             .eq(User::getId,commentVo.getCreateBy());
-                    commentVo.setUsername(userService.getOne(queryWrapper1).getNickName());
+                    User commentUser = userService.getOne(queryWrapper1);
+                    commentVo.setUsername(commentUser.getNickName());
+                    commentVo.setAvatar(commentUser.getAvatar());
                     //如果是根评论则不需要进行查询
                     if (commentVo.getRootId()!=-1) {
                         LambdaQueryWrapper<User> queryWrapper2 = new LambdaQueryWrapper<>();
-                        queryWrapper2.select(User::getUserName)
+                        queryWrapper2.select(User::getUserName,User::getNickName)
                                 .eq(User::getId,commentVo.getToCommentUserId());
-                        commentVo.setToCommentUserName(userService.getOne(queryWrapper2).getUserName());
+                        User toCommentUser = userService.getOne(queryWrapper2);
+                        if (Strings.hasText(toCommentUser.getNickName()))
+                            commentVo.setToCommentUserName(toCommentUser.getNickName());
+                        else
+                            commentVo.setToCommentUserName(toCommentUser.getUserName());
                     }
                 })
                 //转换为List
