@@ -79,7 +79,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 .map(Article::getCategoryId)
                 .collect(Collectors.toSet());
 
-        //把分类的id集合传入到mapper中，查询分类的id和分类的名称
+        //把分类的id集合传入到map中，查询分类的id和分类的名称
         LambdaQueryWrapper<Category> categoryWrapper = new LambdaQueryWrapper<>();
         categoryWrapper.select(Category::getId, Category::getName)
                 .in(Category::getId, categoryIds);
@@ -89,7 +89,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 .collect(Collectors.toMap(Category::getId, Category::getName));
         //把文章的分类id替换成分类的名称
         records = records.stream()
-                .map(article ->
+                .peek(article ->
                         article.setCategoryName(categoryMap.get(article.getCategoryId()))
                                 .setViewCount(viewCountCache.get(article.getId()))
                 )
@@ -108,7 +108,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         LambdaQueryWrapper<Category> categoryWrapper = new LambdaQueryWrapper<>();
         categoryWrapper.select(Category::getName)
                 .eq(Category::getId, article.getCategoryId());
+
         Category category = categoryMapper.selectOne(categoryWrapper);
+
         article.setCategoryName(category.getName())
                 .setViewCount(viewCountCache.get(article.getId()));
         ArticleDetailVo articleDetailVo = BeanCopyUtil.copyBean(article, ArticleDetailVo.class);

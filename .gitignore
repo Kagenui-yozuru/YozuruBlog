@@ -2,6 +2,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+server_log.*
+dump.rdb
+
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

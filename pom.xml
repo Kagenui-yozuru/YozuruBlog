@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>yozuru-framework</module>
-        <module>yozuru-management</module>
+        <module>yozuru-admin</module>
         <module>yozuru-blog</module>
     </modules>
 

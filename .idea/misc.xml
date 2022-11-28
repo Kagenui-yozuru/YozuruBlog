@@ -4,6 +4,9 @@
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="org.springframework.beans.factory.annotation.Autowired" />
     </list>
+    <writeAnnotations>
+      <writeAnnotation name="com.alicp.jetcache.anno.CreateCache" />
+    </writeAnnotations>
   </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MarkdownSettingsMigration">
@@ -13,6 +16,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/yozuru-admin/pom.xml" />
       </list>
     </option>
   </component>

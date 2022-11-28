@@ -17,12 +17,12 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 public class RegisterDto {
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9_-]{6,14}$",message = "长度应为6~14字符。且不能包含特殊符号")
+    @Pattern(regexp = "^[a-zA-Z0-9_]{6,14}$",message = "长度应为6~14字符。且不能包含特殊符号")
     @ApiModelProperty("注册账户的用户名,长度应为6~14字符。仅支持字母、数字、下划线")
     private String userName;
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z0-9_-]{6,14}$",message = "长度应为6~14字符。且不能包含特殊符号")
+    @Pattern(regexp = "^[a-zA-Z0-9_]{6,14}$",message = "长度应为6~14字符。且不能包含特殊符号")
     @ApiModelProperty("注册账户的密码,长度应为6~14字符。仅支持字母、数字、下划线")
     private String password;
 

@@ -20,6 +20,6 @@ import javax.servlet.Filter;
 @MapperScan("com.yozuru.mapper")
 public class BlogApplication {
     public static void main(String[] args) {
-        ConfigurableApplicationContext run = SpringApplication.run(BlogApplication.class, args);
+        SpringApplication.run(BlogApplication.class, args);
     }
 }

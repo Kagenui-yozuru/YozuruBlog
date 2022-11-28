@@ -12,6 +12,18 @@ jetcache:
       keyPrefix: "sms_"
       expireAfterAccessInMillis: 60000
   remote:
+    adminLogin:
+      type: redis
+      host: ${redis.host}
+      port: ${redis.port}
+      keyConvertor: fastjson
+      valueEncoder: kryo
+      valueDecoder: kryo
+      expireAfterWriteInMillis: 86400000
+      poolConfig:
+        minIdle: 1
+        maxIdle: 2
+        maxTotal: 3
     blogLogin:
       type: redis
       host: ${redis.host}
@@ -22,8 +34,8 @@ jetcache:
       expireAfterWriteInMillis: 86400000
       poolConfig:
         minIdle: 1
-        maxIdle: 5
-        maxTotal: 10
+        maxIdle: 2
+        maxTotal: 3
     viewCount:
       type: redis
       host: ${redis.host}
