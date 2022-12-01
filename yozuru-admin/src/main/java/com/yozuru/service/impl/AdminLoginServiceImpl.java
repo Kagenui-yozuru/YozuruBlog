@@ -5,7 +5,7 @@ import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.RedisConstant;
-import com.yozuru.domain.dto.BlogLoginDto;
+import com.yozuru.domain.dto.LoginDto;
 import com.yozuru.domain.entity.LoginUser;
 import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.exception.BusinessException;
@@ -34,7 +34,7 @@ public class AdminLoginServiceImpl implements AdminLoginService {
     @CreateCache(area = "adminLogin", name = RedisConstant.ADMIN_USER_KEY_PREFIX,cacheType = CacheType.REMOTE)
     private Cache<Long, LoginUser> adminDetailCache;
 
-    public ResponseResult<Map<String,String>> login(BlogLoginDto loginDto) {
+    public ResponseResult<Map<String,String>> login(LoginDto loginDto) {
         //通过用户名和密码来生成本次验证的token
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUserName(), loginDto.getPassword());

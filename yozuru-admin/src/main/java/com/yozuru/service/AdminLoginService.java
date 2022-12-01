@@ -1,7 +1,7 @@
 package com.yozuru.service;
 
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.BlogLoginDto;
+import com.yozuru.domain.dto.LoginDto;
 
 import java.util.Map;
 
@@ -10,5 +10,5 @@ import java.util.Map;
  */
 
 public interface AdminLoginService {
-   ResponseResult<Map<String,String>> login(BlogLoginDto loginDto);
+   ResponseResult<Map<String,String>> login(LoginDto loginDto);
 }

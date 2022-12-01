@@ -44,7 +44,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         //根据分类id查询分类表 分组须为可用状态。
         LambdaQueryWrapper<Category> categoryWrapper = new LambdaQueryWrapper<>();
         categoryWrapper.in(Category::getId, collect)
-                        .eq(Category::getStatus, SystemConstant.CATEGORY_STATUS_NORMAL)
+                        .eq(Category::getStatus, SystemConstant.STATUS_NORMAL)
                         .select(Category::getId, Category::getName);
         List<Category> categoryList = list(categoryWrapper);
         List<GetCategoryListVo> getCategoryListVos = BeanCopyUtil.copyBeanList(categoryList, GetCategoryListVo.class);

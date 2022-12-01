@@ -20,15 +20,24 @@ public class SystemConstant {
     /**
      * 表示分组为正常状态
      */
-    public static final Integer CATEGORY_STATUS_NORMAL = 0;
+    public static final Integer STATUS_NORMAL = 0;
     /**
      * 表示分组为禁用状态
      */
-    public static final Integer CATEGORY_STATUS_FORBIDDEN = 1;
+    public static final Integer STATUS_FORBIDDEN = 1;
     /**
      * 表示该评论为根评论
      */
     public static final Integer COMMENT_ROOT_ID=-1;
-
+    /**
+     * 表示该评论为文章评论
+     */
     public static final Integer COMMENT_TYPE_ARTICLE=0;
+    /**
+     * 超极管理员id
+     */
+    public static final long ADMIN_ID=1L;
+    public static final String MENU="C";
+    public static final String INDEX="M";
+    public static final String BUTTON="F";
 }

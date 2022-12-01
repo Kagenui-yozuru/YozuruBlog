@@ -5,7 +5,7 @@ import com.alicp.jetcache.anno.CacheType;
 import com.alicp.jetcache.anno.CreateCache;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.RedisConstant;
-import com.yozuru.domain.dto.BlogLoginDto;
+import com.yozuru.domain.dto.LoginDto;
 import com.yozuru.domain.entity.LoginUser;
 import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.domain.vo.BlogUserLoginVo;
@@ -41,7 +41,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
     @CreateCache(area = "blogLogin", name = RedisConstant.BLOG_USER_KEY_PREFIX,cacheType = CacheType.REMOTE)
     private Cache<Long, LoginUser> userDetailCache;
 
-    public ResponseResult<BlogUserLoginVo> login(BlogLoginDto loginDto) {
+    public ResponseResult<BlogUserLoginVo> login(LoginDto loginDto) {
         //通过用户名和密码来生成本次验证的token
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUserName(), loginDto.getPassword());

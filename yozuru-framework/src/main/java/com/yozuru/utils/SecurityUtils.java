@@ -1,11 +1,11 @@
 package com.yozuru.utils;
 
+import com.yozuru.domain.constants.SystemConstant;
 import com.yozuru.domain.entity.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public class SecurityUtils
-{
+public class SecurityUtils {
 
     /**
      * 获取用户
@@ -23,7 +23,7 @@ public class SecurityUtils
 
     public static Boolean isAdmin(){
         Long id = getLoginUser().getUser().getId();
-        return id != null && 1L == id;
+        return id != null && SystemConstant.ADMIN_ID == id;
     }
 
     public static Long getUserId() {

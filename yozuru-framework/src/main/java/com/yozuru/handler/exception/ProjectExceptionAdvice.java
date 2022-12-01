@@ -29,8 +29,10 @@ public class ProjectExceptionAdvice {
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
     public ResponseResult<Object> illegalParameterException(MethodArgumentNotValidException e){
-        log.error("数据校验出现问题{},异常类型:{}",e.getMessage(),e.getClass());
-        return ResponseResult.errorResult(HttpCodeEnum.ILLEGAL_PARAMETER.getCode(),e.getMessage());
+        String message = e.getMessage();
+        message = message.substring(message.lastIndexOf("[")+1, message.lastIndexOf("]")-1);
+        log.error("数据校验出现问题:'{}',异常类型:{}",message,e.getClass());
+        return ResponseResult.errorResult(HttpCodeEnum.ILLEGAL_PARAMETER.getCode(),message);
     }
     @ExceptionHandler
     public ResponseResult<Object> toUnknownException(Exception e){

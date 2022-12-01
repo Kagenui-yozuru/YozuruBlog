@@ -2,7 +2,7 @@ package com.yozuru.service;
 
 
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.BlogLoginDto;
+import com.yozuru.domain.dto.LoginDto;
 import com.yozuru.domain.vo.BlogUserLoginVo;
 
 /**
@@ -12,7 +12,7 @@ import com.yozuru.domain.vo.BlogUserLoginVo;
  */
 
 public interface BlogLoginService {
-    ResponseResult<BlogUserLoginVo> login(BlogLoginDto loginDto);
+    ResponseResult<BlogUserLoginVo> login(LoginDto loginDto);
 
     ResponseResult<Object> logout();
 }

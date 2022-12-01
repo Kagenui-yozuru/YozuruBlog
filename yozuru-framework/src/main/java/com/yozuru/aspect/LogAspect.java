@@ -25,7 +25,7 @@ public class LogAspect {
     public void pointCut() {
     }
 
-    @Around("pointCut()")
+    //@Around("pointCut()")
     public Object printLog(ProceedingJoinPoint joinPoint) throws Throwable {
         //before
         Object ret = null;
