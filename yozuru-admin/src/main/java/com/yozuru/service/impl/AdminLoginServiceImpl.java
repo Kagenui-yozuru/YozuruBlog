@@ -12,6 +12,7 @@ import com.yozuru.exception.BusinessException;
 import com.yozuru.exception.SystemException;
 import com.yozuru.service.AdminLoginService;
 import com.yozuru.utils.JwtUtil;
+import com.yozuru.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -62,5 +63,13 @@ public class AdminLoginServiceImpl implements AdminLoginService {
         Map<String,String> result = new HashMap<>();
         result.put("token",jwt);
         return ResponseResult.success(result);
+    }
+
+    public ResponseResult<Object> loginOut() {
+        //获得本次登录的用户id
+        Long id = SecurityUtils.getUserId();
+        //在redis中删除用户详细信息
+        adminDetailCache.remove(id);
+        return ResponseResult.success();
     }
 }

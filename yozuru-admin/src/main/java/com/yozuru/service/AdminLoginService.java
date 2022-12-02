@@ -11,4 +11,6 @@ import java.util.Map;
 
 public interface AdminLoginService {
    ResponseResult<Map<String,String>> login(LoginDto loginDto);
+
+   ResponseResult<Object> loginOut();
 }
