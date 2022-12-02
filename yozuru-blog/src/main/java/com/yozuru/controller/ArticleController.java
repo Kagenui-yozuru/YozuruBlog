@@ -2,6 +2,7 @@ package com.yozuru.controller;
 
 import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
+import com.yozuru.domain.dto.PageDto;
 import com.yozuru.domain.vo.ArticleDetailVo;
 import com.yozuru.domain.vo.ArticleListVo;
 import com.yozuru.domain.vo.HotArticlesVo;
@@ -11,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,8 +39,8 @@ public class ArticleController {
     @SystemLog(businessName = "分页获取文章列表")
     @ApiOperation("分页获取文章列表")
     @GetMapping("/articleList")
-    public ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, Integer pageNum, Integer pageSize){
-        return articleService.getArticleList(categoryId, pageNum, pageSize);
+    public ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, @Validated PageDto pageDto){
+        return articleService.getArticleList(categoryId,pageDto);
     }
     @SystemLog(businessName = "获取文章详情")
     @ApiOperation("获取文章详情")

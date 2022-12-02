@@ -2,6 +2,7 @@ package com.yozuru.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yozuru.domain.ResponseResult;
+import com.yozuru.domain.dto.PageDto;
 import com.yozuru.domain.entity.Article;
 import com.yozuru.domain.vo.ArticleDetailVo;
 import com.yozuru.domain.vo.ArticleListVo;
@@ -21,7 +22,7 @@ public interface ArticleService extends IService<Article> {
 
     ResponseResult<List<HotArticlesVo>> hotArticlesList();
 
-    ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, Integer pageNum, Integer pageSize);
+    ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, PageDto pageDto);
 
     ResponseResult<ArticleDetailVo> getArticleDetail(Long id);
 

@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.RedisConstant;
 import com.yozuru.domain.constants.SystemConstant;
+import com.yozuru.domain.dto.PageDto;
 import com.yozuru.domain.entity.Category;
 import com.yozuru.domain.vo.ArticleDetailVo;
 import com.yozuru.domain.vo.ArticleListVo;
@@ -63,8 +64,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, Integer pageNum, Integer pageSize) {
-        IPage<Article> pageData = new Page<>(pageNum, pageSize);
+    public ResponseResult<PageVo<ArticleListVo>> getArticleList(Long categoryId, PageDto pageDto) {
+        IPage<Article> pageData = new Page<>(pageDto.getPageNum(), pageDto.getPageSize());
         //分页查询文章，按照创建时间倒序、并将置顶的文章排在前面。为减少传输数据量，只查询文章的id、标题、摘要、缩略图、访问量、创建时间、分类id。
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.select(Article::getId, Article::getTitle, Article::getSummary, Article::getCategoryId, Article::getThumbnail, Article::getStatus,Article::getCreateTime)

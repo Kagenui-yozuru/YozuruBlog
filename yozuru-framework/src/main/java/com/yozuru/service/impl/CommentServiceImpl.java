@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.SystemConstant;
 import com.yozuru.domain.dto.AddCommentDto;
+import com.yozuru.domain.dto.PageDto;
 import com.yozuru.domain.entity.User;
 import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.domain.vo.CommentVo;
@@ -37,7 +38,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     private UserService userService;
 
     @Override
-    public ResponseResult<PageVo<CommentVo>> getCommentList(Long articleId, Integer pageNum, Integer pageSize) {
+    public ResponseResult<PageVo<CommentVo>> getCommentList(Long articleId, PageDto pageDto) {
         //查询文章对应的根评论
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
         //匹配文章id
@@ -46,7 +47,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 .eq(Comment::getRootId, SystemConstant.COMMENT_ROOT_ID)
                 .eq(Comment::getType,SystemConstant.COMMENT_TYPE_ARTICLE)
         ;
-        Page<Comment> pageObj = new Page<>(pageNum,pageSize);
+        Page<Comment> pageObj = new Page<>(pageDto.getPageNum(),pageDto.getPageSize());
         //进行分页查询
         pageObj=page(pageObj,queryWrapper);
         //把查询的结果封装成List<CommentVo>

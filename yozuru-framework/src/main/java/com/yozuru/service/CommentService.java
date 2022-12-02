@@ -3,6 +3,7 @@ package com.yozuru.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.AddCommentDto;
+import com.yozuru.domain.dto.PageDto;
 import com.yozuru.domain.entity.Comment;
 import com.yozuru.domain.vo.CommentVo;
 import com.yozuru.domain.vo.PageVo;
@@ -16,7 +17,7 @@ import com.yozuru.domain.vo.PageVo;
 
 public interface CommentService extends IService<Comment> {
 
-    ResponseResult<PageVo<CommentVo>> getCommentList(Long articleId, Integer pageNum, Integer pageSize);
+    ResponseResult<PageVo<CommentVo>> getCommentList(Long articleId, PageDto pageDto);
 
     ResponseResult<Object> addCommentList(AddCommentDto addCommentDto);
 }
