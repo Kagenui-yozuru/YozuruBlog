@@ -202,5 +202,18 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         articleTagService.saveBatch(articleTagList);
         return ResponseResult.success();
     }
+
+    @Override
+    public ResponseResult<Object> deleteArticle(Long id) {
+        //删除文章
+        removeById(id);
+        //删除文章和标签的关系
+        LambdaQueryWrapper<ArticleTag> articleTagWrapper = new LambdaQueryWrapper<>();
+        articleTagWrapper.eq(ArticleTag::getArticleId, id);
+        articleTagService.remove(articleTagWrapper);
+        //删除文章浏览量的缓存
+        viewCountCache.remove(id);
+        return ResponseResult.success();
+    }
 }
 

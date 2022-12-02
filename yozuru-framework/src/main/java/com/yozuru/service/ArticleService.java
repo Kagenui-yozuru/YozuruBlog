@@ -36,5 +36,7 @@ public interface ArticleService extends IService<Article> {
 
     @Validated
     ResponseResult<Object> updateArticle(ArticleDto articleDto);
+
+    ResponseResult<Object> deleteArticle(Long id);
 }
 

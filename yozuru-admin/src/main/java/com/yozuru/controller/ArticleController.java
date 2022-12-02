@@ -40,4 +40,9 @@ public class ArticleController {
         return articleService.updateArticle(articleDto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseResult<Object> deleteArticle(@PathVariable Long id) {
+        return articleService.deleteArticle(id);
+    }
+
 }
