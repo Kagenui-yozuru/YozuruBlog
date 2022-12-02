@@ -14,9 +14,18 @@ import java.util.List;
  */
 
 public interface MenuService extends IService<Menu> {
-
+    /**
+     * 根据用户ID查询该用户的权限关键字
+     * @param id 用户ID
+     * @return 权限关键字列表
+     */
     List<String> selectPermsByUserId(Long id);
 
+    /**
+     * 根据用户ID查询该用户的菜单树
+     * @param id 用户ID
+     * @return 菜单树
+     */
     List<MenuVo> selectRouterMenuTreeByUserId(Long id);
 }
 

@@ -28,7 +28,7 @@ import java.util.List;
 public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagService {
 
     @Override
-    public ResponseResult<PageVo<TagVo>> selectTagList(TagDto tagDto, PageDto pageDto) {
+    public ResponseResult<PageVo<TagVo>> getTagPageList(TagDto tagDto, PageDto pageDto) {
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
         // 规定返回的字段
         queryWrapper.select(Tag::getId, Tag::getName, Tag::getRemark,Tag::getUpdateTime)
@@ -51,6 +51,16 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         Tag tag = getById(id);
         TagVo tagVo = BeanCopyUtil.copyBean(tag, TagVo.class);
         return ResponseResult.success(tagVo);
+    }
+
+    @Override
+    public ResponseResult<List<TagVo>> getAllTag() {
+        LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
+        // 规定返回的字段
+        queryWrapper.select(Tag::getId, Tag::getName);
+        List<Tag> list = list(queryWrapper);
+        List<TagVo> tagVos = BeanCopyUtil.copyBeanList(list, TagVo.class);
+        return ResponseResult.success(tagVos);
     }
 
     @Override

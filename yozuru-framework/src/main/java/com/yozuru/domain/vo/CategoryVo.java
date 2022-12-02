@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-public class GetCategoryListVo implements Serializable {
+public class CategoryVo implements Serializable {
     private Long id;
     private String name;
 }

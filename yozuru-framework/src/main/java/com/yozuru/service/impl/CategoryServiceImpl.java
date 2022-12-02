@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.SystemConstant;
 import com.yozuru.domain.entity.Article;
-import com.yozuru.domain.vo.GetCategoryListVo;
+import com.yozuru.domain.vo.CategoryVo;
 import com.yozuru.mapper.ArticleMapper;
 import com.yozuru.mapper.CategoryMapper;
 import com.yozuru.domain.entity.Category;
@@ -30,7 +30,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Autowired
     private ArticleMapper articleMapper;
     @Override
-    public ResponseResult<List<GetCategoryListVo>> getCategoryList() {
+    public ResponseResult<List<CategoryVo>> getCategoryList() {
         //查询文章表 查询条件为状态为已发布的文章，按照分组id分组。
         LambdaQueryWrapper<Article> articleWrapper = new LambdaQueryWrapper<>();
         articleWrapper.eq(Article::getStatus, SystemConstant.ARTICLES_STATUS_NORMAL)
@@ -47,9 +47,19 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
                         .eq(Category::getStatus, SystemConstant.STATUS_NORMAL)
                         .select(Category::getId, Category::getName);
         List<Category> categoryList = list(categoryWrapper);
-        List<GetCategoryListVo> getCategoryListVos = BeanCopyUtil.copyBeanList(categoryList, GetCategoryListVo.class);
+        List<CategoryVo> categoryVos = BeanCopyUtil.copyBeanList(categoryList, CategoryVo.class);
         //封装vo
-        return ResponseResult.success(getCategoryListVos);
+        return ResponseResult.success(categoryVos);
+    }
+
+    @Override
+    public ResponseResult<List<CategoryVo>> getAllCategory() {
+        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Category::getStatus, SystemConstant.STATUS_NORMAL)
+                .select(Category::getId, Category::getName);
+        List<Category> categoryList = list(wrapper);
+        List<CategoryVo> categoryVos = BeanCopyUtil.copyBeanList(categoryList, CategoryVo.class);
+        return ResponseResult.success(categoryVos);
     }
 }
 

@@ -4,7 +4,6 @@ import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.LoginDto;
 import com.yozuru.domain.entity.LoginUser;
-import com.yozuru.domain.entity.Menu;
 import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.domain.vo.AdminInfoVo;
 import com.yozuru.domain.vo.MenuVo;

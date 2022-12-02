@@ -7,11 +7,9 @@ import com.yozuru.domain.vo.PageVo;
 import com.yozuru.domain.vo.TagVo;
 import com.yozuru.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Yozuru
@@ -25,12 +23,17 @@ public class TagController {
 
     @GetMapping("/list")
     public ResponseResult<PageVo<TagVo>> getPageList(TagDto tagDto,PageDto pageDto) {
-        return tagService.selectTagList(tagDto, pageDto);
+        return tagService.getTagPageList(tagDto, pageDto);
     }
 
     @GetMapping("/{id}")
     public ResponseResult<TagVo> getTagById(@PathVariable Long id) {
         return tagService.getVoById(id);
+    }
+
+    @GetMapping("/listAllTag")
+    public ResponseResult<List<TagVo>> listAllTag() {
+        return tagService.getAllTag();
     }
 
     @PostMapping

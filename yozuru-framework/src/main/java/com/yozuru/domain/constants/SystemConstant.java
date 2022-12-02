@@ -37,6 +37,14 @@ public class SystemConstant {
      * 超极管理员id
      */
     public static final long ADMIN_ID=1L;
+    /**
+     * 表示该用户为后台用户
+     */
+    public static final String USER_TYPE_ADMIN="1";
+    /**
+     * 表示该用户为前台用户
+     */
+    public static final String USER_TYPE_NORMAL="0";
     public static final String MENU="C";
     public static final String INDEX="M";
     public static final String BUTTON="F";

@@ -14,6 +14,11 @@ import java.util.List;
 
 public interface RoleService extends IService<Role> {
 
+    /**
+     * 根据用户ID查询该用户的角色信息
+     * @param id 用户ID
+     * @return 角色关键字列表
+     */
     List<String> selectRoleKeysByUserId(Long id);
 }
 

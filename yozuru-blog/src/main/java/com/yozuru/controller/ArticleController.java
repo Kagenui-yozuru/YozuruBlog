@@ -9,7 +9,6 @@ import com.yozuru.domain.vo.HotArticlesVo;
 import com.yozuru.domain.vo.PageVo;
 import com.yozuru.service.ArticleService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

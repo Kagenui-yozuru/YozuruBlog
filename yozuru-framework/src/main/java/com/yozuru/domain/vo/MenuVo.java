@@ -1,23 +1,18 @@
-package com.yozuru.domain.entity;
+package com.yozuru.domain.vo;
 
-import java.util.Date;
-import java.io.Serializable;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.baomidou.mybatisplus.annotation.TableName;
-/**
- * 菜单权限表(Menu)表实体类
- *
- * @author Yozuru
- * @since 2022-11-29 17:45:18
- */
 
+import java.util.Date;
+import java.util.List;
+
+/**
+ * @author Yozuru
+ */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@TableName("sys_menu")
-public class Menu  {
+
+public class MenuVo {
     //菜单ID
     private Long id;
     //菜单名称
@@ -30,8 +25,6 @@ public class Menu  {
     private String path;
     //组件路径
     private String component;
-    //是否为外链（0是 1否）
-    private Integer isFrame;
     //菜单类型（M目录 C菜单 F按钮）
     private String menuType;
     //菜单状态（0显示 1隐藏）
@@ -42,18 +35,8 @@ public class Menu  {
     private String perms;
     //菜单图标
     private String icon;
-    //创建者
-    private Long createBy;
     //创建时间
     private Date createTime;
-    //更新者
-    private Long updateBy;
-    //更新时间
-    private Date updateTime;
-    //备注
-    private String remark;
-    
-    private String delFlag;
-
+    //子菜单
+    private List<MenuVo> children;
 }
-
