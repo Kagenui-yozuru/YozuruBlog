@@ -1,8 +1,10 @@
 package com.yozuru.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.entity.Menu;
 import com.yozuru.domain.vo.MenuVo;
+import com.yozuru.domain.vo.SimpleMenuVo;
 
 import java.util.List;
 
@@ -27,5 +29,19 @@ public interface MenuService extends IService<Menu> {
      * @return 菜单树
      */
     List<MenuVo> selectRouterMenuTreeByUserId(Long id);
+    ResponseResult<List<MenuVo>> selectMenuList(String menuName, String status);
+    ResponseResult<Object> addMenu(Menu menu);
+
+    ResponseResult<MenuVo> getMenuById(Long id);
+
+    ResponseResult<Object> updateMenu(Menu menu);
+
+    ResponseResult<Object> deleteMenu(Long id);
+
+    ResponseResult<List<SimpleMenuVo>> selectTreeAll();
+    ResponseResult<List<SimpleMenuVo>> selectTreeByRoleId(Long id);
+
+    List<Long> selectMenuIdsByRoleId(Long id);
+
 }
 

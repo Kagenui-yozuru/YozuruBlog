@@ -37,8 +37,7 @@ public class UpdateViewCount {
         articles.forEach(article -> {
             Long viewCount = viewCountCache.get(article.getId());
             if (!viewCount.equals(article.getViewCount())) {
-                article.setViewCount(viewCount);
-                articleService.updateById(article);
+                articleService.updateViewCountById(article.getId(), viewCount);
             }
         });
     }

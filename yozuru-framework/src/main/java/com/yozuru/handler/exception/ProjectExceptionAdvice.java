@@ -5,7 +5,6 @@ import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.exception.BusinessException;
 import com.yozuru.exception.SystemException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

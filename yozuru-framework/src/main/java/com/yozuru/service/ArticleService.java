@@ -27,15 +27,17 @@ public interface ArticleService extends IService<Article> {
     ResponseResult<ArticleDetailVo> getArticleDetail(Long id);
 
     ResponseResult<Object> updateViewCount(Long id);
-    @Validated
+    @Validated(ArticleDto.Add.class)
     ResponseResult<Object> addArticle(ArticleDto articleDto);
     @Validated
     ResponseResult<PageVo<ArticleListVo>> getAdminArticleList(ArticleListDto articleListDto, PageDto pageDto);
 
     ResponseResult<ArticleDto> getAdminArticleDetail(Long id);
 
-    @Validated
+    @Validated(ArticleDto.Update.class)
     ResponseResult<Object> updateArticle(ArticleDto articleDto);
+
+    boolean updateViewCountById(Long id,Long viewCount);
 
     ResponseResult<Object> deleteArticle(Long id);
 }

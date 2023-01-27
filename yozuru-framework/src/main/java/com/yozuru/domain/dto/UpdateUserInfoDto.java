@@ -14,7 +14,7 @@ import javax.validation.constraints.*;
 @Data
 @NoArgsConstructor
 public class UpdateUserInfoDto {
-    @Pattern(regexp = "^http://rlv1iif22.hb-bkt.clouddn.com",message = "头像地址格式不正确")
+    @Pattern(regexp = "^http://rninhqsaw.hb-bkt.clouddn.com",message = "头像地址格式不正确")
     @ApiModelProperty("用户上传的头像的url")
     private String avatar;
 

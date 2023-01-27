@@ -1,6 +1,7 @@
 package com.yozuru.domain.vo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -9,16 +10,13 @@ import java.util.List;
 /**
  * @author Yozuru
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 
-public class MenuVo {
-    //菜单ID
-    private Long id;
+public class MenuVo extends SimpleMenuVo {
     //菜单名称
     private String menuName;
-    //父菜单ID
-    private Long parentId;
     //显示顺序
     private Integer orderNum;
     //路由地址
@@ -37,6 +35,5 @@ public class MenuVo {
     private String icon;
     //创建时间
     private Date createTime;
-    //子菜单
-    private List<MenuVo> children;
+
 }

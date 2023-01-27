@@ -31,7 +31,6 @@ jetcache:
       keyConvertor: fastjson
       valueEncoder: kryo
       valueDecoder: kryo
-      expireAfterWriteInMillis: 900000
       poolConfig:
         minIdle: 1
         maxIdle: 5

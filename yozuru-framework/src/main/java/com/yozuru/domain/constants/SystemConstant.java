@@ -48,4 +48,8 @@ public class SystemConstant {
     public static final String MENU="C";
     public static final String INDEX="M";
     public static final String BUTTON="F";
+    /**
+     * 表示该用户为超级管理员
+     */
+    public static final String CLOSED_USERNAME="已注销用户";
 }

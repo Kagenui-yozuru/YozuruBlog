@@ -1,7 +1,12 @@
 package com.yozuru.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yozuru.domain.ResponseResult;
+import com.yozuru.domain.dto.PageDto;
+import com.yozuru.domain.dto.RoleDto;
 import com.yozuru.domain.entity.Role;
+import com.yozuru.domain.vo.PageVo;
+import com.yozuru.domain.vo.RoleVo;
 
 import java.util.List;
 
@@ -20,5 +25,17 @@ public interface RoleService extends IService<Role> {
      * @return 角色关键字列表
      */
     List<String> selectRoleKeysByUserId(Long id);
+
+    ResponseResult<PageVo<RoleVo>> getRoleListByPage(PageDto pageDto, String roleName, String status);
+
+    ResponseResult<Object> updateStatus(Long roleId, String status);
+
+    ResponseResult<Object> addRole(RoleDto roleDto);
+
+    ResponseResult<RoleVo> getRoleById(Long id);
+
+    ResponseResult<Object> updateRole(RoleDto roleDto);
+
+    ResponseResult<Object> deleteRoleById(Long id);
 }
 

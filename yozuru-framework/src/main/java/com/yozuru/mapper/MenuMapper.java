@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yozuru.domain.entity.Menu;
 import com.yozuru.domain.vo.MenuVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,5 +22,9 @@ public interface MenuMapper extends BaseMapper<Menu> {
     List<MenuVo> selectAllRouterMenuTree();
 
     List<MenuVo> selectRouterMenuTreeByUserId(Long id);
+
+    List<Menu> selectMenuListByRoleId(Long id);
+
+    List<Long> selectMenuIdsByRoleId(Long id);
 }
 

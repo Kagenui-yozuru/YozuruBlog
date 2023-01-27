@@ -16,7 +16,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         try {
             userId = SecurityUtils.getUserId();
         } catch (ClassCastException e) {
-            userId = -1L;//表示是自己创建
+            userId = -1L;//表示该数据是自己创建
         }
         this.setFieldValByName("createTime", new Date(), metaObject);
         this.setFieldValByName("createBy",userId , metaObject);

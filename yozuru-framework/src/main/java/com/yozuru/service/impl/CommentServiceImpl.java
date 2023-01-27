@@ -46,6 +46,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 //匹配根评论
                 .eq(Comment::getRootId, SystemConstant.COMMENT_ROOT_ID)
                 .eq(Comment::getType,SystemConstant.COMMENT_TYPE_ARTICLE)
+                .orderByDesc(Comment::getCreateTime);
         ;
         Page<Comment> pageObj = new Page<>(pageDto.getPageNum(),pageDto.getPageSize());
         //进行分页查询
@@ -54,6 +55,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         List<CommentVo> rootCommentVoList = toCommentVoList(pageObj.getRecords());
         //再把根评论的子评论赋给每个元素
         List<CommentVo> commentVoList = rootCommentVoList.stream()
+                //自己的id作为子评论的根id
                 .peek(commentVo -> commentVo.setChildren(getChildrenComment(commentVo.getId())))
                 .collect(Collectors.toList());
         //把List<CommentVo>封装成PageVo
@@ -73,6 +75,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return ResponseResult.success();
     }
 
+    /**
+     * 通过评论id,获得该评论的所有子评论
+     * @param rootId 评论id
+     * @return List<CommentVo>子评论列表
+     */
     private List<CommentVo> getChildrenComment(Long rootId){
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Comment::getRootId,rootId);
@@ -80,6 +87,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return toCommentVoList(list);
     }
 
+    /**
+     * 把List<Comment>转换成List<CommentVo>,即把评论的用户信息补充上
+     * @param commentList 评论列表
+     * @return List<CommentVo> 评论视图列表
+     */
     private List<CommentVo> toCommentVoList(List<Comment> commentList){
         //先通过工具类给CommentVo中公共属性复制
         List<CommentVo> commentVoList = BeanCopyUtil.copyBeanList(commentList, CommentVo.class);
@@ -91,15 +103,17 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                     queryWrapper1.select(User::getNickName,User::getAvatar)
                             .eq(User::getId,commentVo.getCreateBy());
                     User commentUser = userService.getOne(queryWrapper1);
-                    commentVo.setUsername(commentUser.getNickName());
-                    commentVo.setAvatar(commentUser.getAvatar());
+                    commentVo.setUsername(commentUser==null?SystemConstant.CLOSED_USERNAME:commentUser.getNickName());
+                    commentVo.setAvatar(commentUser==null?"":commentUser.getAvatar());
                     //如果是根评论则不需要进行查询
                     if (commentVo.getRootId()!=-1) {
                         LambdaQueryWrapper<User> queryWrapper2 = new LambdaQueryWrapper<>();
                         queryWrapper2.select(User::getUserName,User::getNickName)
                                 .eq(User::getId,commentVo.getToCommentUserId());
                         User toCommentUser = userService.getOne(queryWrapper2);
-                        if (Strings.hasText(toCommentUser.getNickName()))
+                        if (toCommentUser==null){
+                            commentVo.setToCommentUserName(SystemConstant.CLOSED_USERNAME);
+                        } else if (Strings.hasText(toCommentUser.getNickName()))
                             commentVo.setToCommentUserName(toCommentUser.getNickName());
                         else
                             commentVo.setToCommentUserName(toCommentUser.getUserName());

@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 
 /**
  * 文章表(Article)表服务实现类
- *
  * @author Yozuru
  * @since 2022-11-17 19:27:56
  */
@@ -201,6 +200,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //再添加新的关系
         articleTagService.saveBatch(articleTagList);
         return ResponseResult.success();
+    }
+
+    @Override
+    public boolean updateViewCountById(Long id, Long viewCount) {
+       baseMapper.updateViewCountById(id,viewCount);
+       return true;
     }
 
     @Override

@@ -1,5 +1,3 @@
-server:
-  port: 7777
 spring:
   datasource:
     druid:
