@@ -2,7 +2,7 @@ package com.yozuru.controller;
 
 import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.vo.CategoryVo;
+import com.yozuru.domain.vo.forestage.CategoryVo;
 import com.yozuru.service.CategoryService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;

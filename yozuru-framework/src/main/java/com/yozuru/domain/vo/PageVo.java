@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * 通用的分页返回对象
  * @author Yozuru
  */
 @Data

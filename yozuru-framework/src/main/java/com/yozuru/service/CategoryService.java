@@ -3,7 +3,7 @@ package com.yozuru.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.entity.Category;
-import com.yozuru.domain.vo.CategoryVo;
+import com.yozuru.domain.vo.forestage.CategoryVo;
 
 import java.util.List;
 

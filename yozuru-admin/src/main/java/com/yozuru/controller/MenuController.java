@@ -2,10 +2,10 @@ package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.entity.Menu;
-import com.yozuru.domain.vo.MenuIdVo;
-import com.yozuru.domain.vo.MenuVo;
-import com.yozuru.domain.vo.SimpleMenuVo;
-import com.yozuru.service.MenuService;
+import com.yozuru.domain.vo.backstage.MenuIdVo;
+import com.yozuru.domain.vo.backstage.MenuVo;
+import com.yozuru.domain.vo.backstage.SimpleMenuVo;
+import com.yozuru.service.backstage.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

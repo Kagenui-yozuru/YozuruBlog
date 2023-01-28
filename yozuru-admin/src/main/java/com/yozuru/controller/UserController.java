@@ -2,13 +2,13 @@ package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.PageDto;
-import com.yozuru.domain.dto.QueryUserDto;
-import com.yozuru.domain.dto.UserDto;
+import com.yozuru.domain.dto.backstage.QueryUserDto;
+import com.yozuru.domain.dto.backstage.UserDto;
 import com.yozuru.domain.vo.PageVo;
-import com.yozuru.domain.vo.SimpleRoleVo;
-import com.yozuru.domain.vo.UpdateUserVo;
-import com.yozuru.domain.vo.UserListVo;
-import com.yozuru.service.RoleService;
+import com.yozuru.domain.vo.backstage.SimpleRoleVo;
+import com.yozuru.domain.vo.backstage.UpdateUserVo;
+import com.yozuru.domain.vo.backstage.UserVo;
+import com.yozuru.service.backstage.RoleService;
 import com.yozuru.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ public class UserController {
     private RoleService roleService;
 
     @GetMapping("/list")
-    public ResponseResult<PageVo<UserListVo>> getUserList(PageDto pageDto, QueryUserDto queryUserDto){
+    public ResponseResult<PageVo<UserVo>> getUserList(PageDto pageDto, QueryUserDto queryUserDto){
         return userService.getUserListByPage(queryUserDto,pageDto);
     }
 

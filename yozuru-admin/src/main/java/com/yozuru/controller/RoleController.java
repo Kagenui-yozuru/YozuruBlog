@@ -2,14 +2,12 @@ package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.PageDto;
-import com.yozuru.domain.dto.RoleDto;
-import com.yozuru.domain.dto.RoleStatusDto;
+import com.yozuru.domain.dto.backstage.RoleDto;
+import com.yozuru.domain.dto.backstage.RoleStatusDto;
 import com.yozuru.domain.vo.PageVo;
-import com.yozuru.domain.vo.RoleVo;
-import com.yozuru.domain.vo.SimpleRoleVo;
-import com.yozuru.service.RoleService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import com.yozuru.domain.vo.backstage.RoleVo;
+import com.yozuru.domain.vo.backstage.SimpleRoleVo;
+import com.yozuru.service.backstage.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

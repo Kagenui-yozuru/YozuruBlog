@@ -2,11 +2,14 @@ package com.yozuru.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.ArticleDto;
-import com.yozuru.domain.dto.ArticleListDto;
+import com.yozuru.domain.dto.backstage.ArticleDto;
+import com.yozuru.domain.dto.backstage.QueryArticleListDto;
 import com.yozuru.domain.dto.PageDto;
 import com.yozuru.domain.entity.Article;
 import com.yozuru.domain.vo.*;
+import com.yozuru.domain.vo.forestage.ArticleDetailVo;
+import com.yozuru.domain.vo.forestage.ArticleListVo;
+import com.yozuru.domain.vo.forestage.HotArticlesVo;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
@@ -30,7 +33,7 @@ public interface ArticleService extends IService<Article> {
     @Validated(ArticleDto.Add.class)
     ResponseResult<Object> addArticle(ArticleDto articleDto);
     @Validated
-    ResponseResult<PageVo<ArticleListVo>> getAdminArticleList(ArticleListDto articleListDto, PageDto pageDto);
+    ResponseResult<PageVo<ArticleListVo>> getAdminArticleList(QueryArticleListDto queryArticleListDto, PageDto pageDto);
 
     ResponseResult<ArticleDto> getAdminArticleDetail(Long id);
 

@@ -2,10 +2,10 @@ package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.PageDto;
-import com.yozuru.domain.dto.TagDto;
+import com.yozuru.domain.dto.backstage.TagDto;
 import com.yozuru.domain.vo.PageVo;
-import com.yozuru.domain.vo.TagVo;
-import com.yozuru.service.TagService;
+import com.yozuru.domain.vo.backstage.TagVo;
+import com.yozuru.service.backstage.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

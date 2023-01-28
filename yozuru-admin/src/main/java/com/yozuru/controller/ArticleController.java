@@ -1,10 +1,10 @@
 package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.ArticleDto;
-import com.yozuru.domain.dto.ArticleListDto;
+import com.yozuru.domain.dto.backstage.ArticleDto;
+import com.yozuru.domain.dto.backstage.QueryArticleListDto;
 import com.yozuru.domain.dto.PageDto;
-import com.yozuru.domain.vo.ArticleListVo;
+import com.yozuru.domain.vo.forestage.ArticleListVo;
 import com.yozuru.domain.vo.PageVo;
 import com.yozuru.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class ArticleController {
     }
 
     @GetMapping("/list")
-    public ResponseResult<PageVo<ArticleListVo>> getArticleList(ArticleListDto articleListDto, PageDto pageDto) {
-        return articleService.getAdminArticleList(articleListDto,pageDto);
+    public ResponseResult<PageVo<ArticleListVo>> getArticleList(QueryArticleListDto queryArticleListDto, PageDto pageDto) {
+        return articleService.getAdminArticleList(queryArticleListDto,pageDto);
     }
 
     @GetMapping("/{id}")

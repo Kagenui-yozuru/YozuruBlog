@@ -2,9 +2,9 @@ package com.yozuru.controller;
 
 import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.RegisterDto;
-import com.yozuru.domain.dto.UpdateUserInfoDto;
-import com.yozuru.domain.vo.UserInfoVo;
+import com.yozuru.domain.dto.forestage.RegisterDto;
+import com.yozuru.domain.dto.forestage.UserInfoDto;
+import com.yozuru.domain.vo.forestage.UserInfoVo;
 import com.yozuru.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +31,7 @@ public class UserController {
     @SystemLog(businessName = "更新用户信息")
     @ApiOperation("更新当前登录用户的信息，需要传递token")
     @PutMapping("/userInfo")
-    public ResponseResult<Object> updateUserInfo(@RequestBody UpdateUserInfoDto userInfoDto){
+    public ResponseResult<Object> updateUserInfo(@RequestBody UserInfoDto userInfoDto){
         return userService.updateUserInfo(userInfoDto);
     }
     @SystemLog(businessName = "用户注册")

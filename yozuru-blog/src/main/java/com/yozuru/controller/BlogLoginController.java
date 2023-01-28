@@ -4,9 +4,9 @@ import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.LoginDto;
 import com.yozuru.domain.enums.HttpCodeEnum;
-import com.yozuru.domain.vo.BlogUserLoginVo;
+import com.yozuru.domain.vo.forestage.UserLoginVo;
 import com.yozuru.exception.BusinessException;
-import com.yozuru.service.BlogLoginService;
+import com.yozuru.service.forestage.BlogLoginService;
 import io.jsonwebtoken.lang.Strings;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +27,7 @@ public class BlogLoginController {
     @SystemLog(businessName = "用户登录")
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public ResponseResult<BlogUserLoginVo> login(@RequestBody LoginDto loginDto){
+    public ResponseResult<UserLoginVo> login(@RequestBody LoginDto loginDto){
         if (!Strings.hasText(loginDto.getUserName())){
             throw new BusinessException(HttpCodeEnum.REQUIRE_USERNAME);
         }

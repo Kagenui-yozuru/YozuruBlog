@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
+ * 前、后台登录的数据传输对象
  * @author Yozuru
  */
 @Data

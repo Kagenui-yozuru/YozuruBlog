@@ -10,12 +10,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.RedisConstant;
 import com.yozuru.domain.constants.SystemConstant;
-import com.yozuru.domain.dto.ArticleDto;
-import com.yozuru.domain.dto.ArticleListDto;
+import com.yozuru.domain.dto.backstage.ArticleDto;
+import com.yozuru.domain.dto.backstage.QueryArticleListDto;
 import com.yozuru.domain.dto.PageDto;
 import com.yozuru.domain.entity.ArticleTag;
 import com.yozuru.domain.entity.Category;
 import com.yozuru.domain.vo.*;
+import com.yozuru.domain.vo.forestage.ArticleDetailVo;
+import com.yozuru.domain.vo.forestage.ArticleListVo;
+import com.yozuru.domain.vo.forestage.HotArticlesVo;
 import com.yozuru.mapper.ArticleMapper;
 import com.yozuru.domain.entity.Article;
 import com.yozuru.mapper.CategoryMapper;
@@ -147,11 +150,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public ResponseResult<PageVo<ArticleListVo>> getAdminArticleList(ArticleListDto articleListDto, PageDto pageDto) {
+    public ResponseResult<PageVo<ArticleListVo>> getAdminArticleList(QueryArticleListDto queryArticleListDto, PageDto pageDto) {
         //设置条件查询
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(Strings.isNotBlank(articleListDto.getTitle()),Article::getTitle,articleListDto.getTitle())
-                .like(Strings.isNotBlank(articleListDto.getSummary()),Article::getSummary,articleListDto.getSummary())
+        queryWrapper.like(Strings.isNotBlank(queryArticleListDto.getTitle()),Article::getTitle, queryArticleListDto.getTitle())
+                .like(Strings.isNotBlank(queryArticleListDto.getSummary()),Article::getSummary, queryArticleListDto.getSummary())
                 .orderByDesc(Article::getIsTop)
                 .orderByDesc(Article::getCreateTime);
         //设置分页查询

@@ -1,20 +1,26 @@
 package com.yozuru.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.*;
+import com.yozuru.domain.dto.backstage.QueryUserDto;
+import com.yozuru.domain.dto.backstage.UserDto;
+import com.yozuru.domain.dto.forestage.RegisterDto;
+import com.yozuru.domain.dto.forestage.UserInfoDto;
 import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.domain.vo.*;
+import com.yozuru.domain.vo.backstage.UpdateUserInfoVo;
+import com.yozuru.domain.vo.backstage.UpdateUserVo;
+import com.yozuru.domain.vo.backstage.UserVo;
+import com.yozuru.domain.vo.forestage.UserInfoVo;
 import com.yozuru.exception.BusinessException;
 import com.yozuru.mapper.UserMapper;
 import com.yozuru.domain.entity.User;
 import com.yozuru.service.UserService;
 import com.yozuru.utils.BeanCopyUtil;
 import com.yozuru.utils.SecurityUtils;
-import kotlin.jvm.internal.Lambda;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,7 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public ResponseResult<Object> updateUserInfo(UpdateUserInfoDto userInfoDto) {
+    public ResponseResult<Object> updateUserInfo(UserInfoDto userInfoDto) {
         User user = BeanCopyUtil.copyBean(userInfoDto, User.class);
         user.setId(SecurityUtils.getUserId());
         updateById(user);
@@ -68,7 +74,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public ResponseResult<PageVo<UserListVo>> getUserListByPage(QueryUserDto queryUserDto, PageDto pageDto) {
+    public ResponseResult<PageVo<UserVo>> getUserListByPage(QueryUserDto queryUserDto, PageDto pageDto) {
         LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
         wrapper.like(Strings.isNotEmpty(queryUserDto.getUserName()),User::getUserName,queryUserDto.getUserName())
                 .eq(Strings.isNotEmpty(queryUserDto.getPhonenumber()),User::getPhonenumber,queryUserDto.getPhonenumber())
@@ -77,8 +83,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Page<User> pageObj = new Page<>(pageDto.getPageNum(),pageDto.getPageSize());
         pageObj= page(pageObj, wrapper);
         List<User> users = pageObj.getRecords();
-        List<UserListVo> userListVos = BeanCopyUtil.copyBeanList(users, UserListVo.class);
-        PageVo<UserListVo> pageVo = new PageVo<>(userListVos,pageObj.getTotal());
+        List<UserVo> userVos = BeanCopyUtil.copyBeanList(users, UserVo.class);
+        PageVo<UserVo> pageVo = new PageVo<>(userVos,pageObj.getTotal());
         return ResponseResult.success(pageVo);
     }
 

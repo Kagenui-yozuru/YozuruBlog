@@ -2,11 +2,11 @@ package com.yozuru.controller;
 
 import com.yozuru.annotation.SystemLog;
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.AddCommentDto;
+import com.yozuru.domain.dto.forestage.AddCommentDto;
 import com.yozuru.domain.dto.PageDto;
-import com.yozuru.domain.vo.CommentVo;
+import com.yozuru.domain.vo.forestage.CommentVo;
 import com.yozuru.domain.vo.PageVo;
-import com.yozuru.service.CommentService;
+import com.yozuru.service.forestage.CommentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

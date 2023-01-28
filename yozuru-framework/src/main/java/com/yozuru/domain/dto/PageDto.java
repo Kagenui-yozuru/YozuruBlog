@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 /**
+ * 分页查询通用的dto
  * @author Yozuru
  */
 @Data

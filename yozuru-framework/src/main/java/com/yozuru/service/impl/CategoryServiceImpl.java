@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.SystemConstant;
 import com.yozuru.domain.entity.Article;
-import com.yozuru.domain.vo.CategoryVo;
+import com.yozuru.domain.vo.forestage.CategoryVo;
 import com.yozuru.mapper.ArticleMapper;
 import com.yozuru.mapper.CategoryMapper;
 import com.yozuru.domain.entity.Category;
