@@ -13,6 +13,7 @@ import com.yozuru.domain.enums.HttpCodeEnum;
 import com.yozuru.domain.vo.PageVo;
 import com.yozuru.domain.vo.RoleVo;
 import com.yozuru.domain.vo.SimpleMenuVo;
+import com.yozuru.domain.vo.SimpleRoleVo;
 import com.yozuru.mapper.RoleMapper;
 import com.yozuru.domain.entity.Role;
 import com.yozuru.service.RoleService;
@@ -66,6 +67,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         baseMapper.deleteRoleMenuByRoleId(id);
         removeById(id);
         return ResponseResult.success();
+    }
+
+    @Override
+    public ResponseResult<List<SimpleRoleVo>> getAllRole() {
+        List<Role> roleList = list();
+        List<SimpleRoleVo> simpleRoleVoList = BeanCopyUtil.copyBeanList(roleList, SimpleRoleVo.class);
+        return ResponseResult.success(simpleRoleVoList);
     }
 
     @Override

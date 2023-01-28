@@ -2,12 +2,12 @@ package com.yozuru.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.RegisterDto;
-import com.yozuru.domain.dto.UpdateUserInfoDto;
+import com.yozuru.domain.dto.*;
 import com.yozuru.domain.enums.HttpCodeEnum;
-import com.yozuru.domain.vo.UserInfoVo;
+import com.yozuru.domain.vo.*;
 import com.yozuru.exception.BusinessException;
 import com.yozuru.mapper.UserMapper;
 import com.yozuru.domain.entity.User;
@@ -15,9 +15,13 @@ import com.yozuru.service.UserService;
 import com.yozuru.utils.BeanCopyUtil;
 import com.yozuru.utils.SecurityUtils;
 import kotlin.jvm.internal.Lambda;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 用户表(User)表服务实现类
@@ -63,6 +67,55 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return ResponseResult.success();
     }
 
+    @Override
+    public ResponseResult<PageVo<UserListVo>> getUserListByPage(QueryUserDto queryUserDto, PageDto pageDto) {
+        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<>();
+        wrapper.like(Strings.isNotEmpty(queryUserDto.getUserName()),User::getUserName,queryUserDto.getUserName())
+                .eq(Strings.isNotEmpty(queryUserDto.getPhonenumber()),User::getPhonenumber,queryUserDto.getPhonenumber())
+                .eq(Strings.isNotEmpty(queryUserDto.getStatus()),User::getStatus,queryUserDto.getStatus())
+                .orderByAsc(User::getCreateTime);
+        Page<User> pageObj = new Page<>(pageDto.getPageNum(),pageDto.getPageSize());
+        pageObj= page(pageObj, wrapper);
+        List<User> users = pageObj.getRecords();
+        List<UserListVo> userListVos = BeanCopyUtil.copyBeanList(users, UserListVo.class);
+        PageVo<UserListVo> pageVo = new PageVo<>(userListVos,pageObj.getTotal());
+        return ResponseResult.success(pageVo);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseResult<Object> addUser(UserDto userDto) {
+        if (userNameExit(userDto.getUserName()))
+            throw new BusinessException(HttpCodeEnum.USERNAME_EXIST);
+        if (emailExit(userDto.getEmail()))
+            throw new BusinessException(HttpCodeEnum.EMAIL_EXIST);
+        if (phoneExit(userDto.getPhonenumber()))
+            throw new BusinessException(HttpCodeEnum.PHONENUMBER_EXIST);
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        User user=BeanCopyUtil.copyBean(userDto,User.class);
+        save(user);
+        baseMapper.insertUserRole(user.getId(),userDto.getRoleIds());
+        return ResponseResult.success();
+    }
+
+    @Override
+    public ResponseResult<Object> deleteUserById(Long id) {
+        removeById(id);
+        baseMapper.deleteUserRole(id);
+        return ResponseResult.success();
+    }
+
+    @Override
+    public UpdateUserVo getUserInfoById(Long id) {
+        User user = getById(id);
+        UpdateUserInfoVo updateUserInfoVo = BeanCopyUtil.copyBean(user, UpdateUserInfoVo.class);
+        UpdateUserVo updateUserVo = new UpdateUserVo();
+        updateUserVo.setUser(updateUserInfoVo);
+        List<Long> roleIds = baseMapper.getRoleIdsByUserId(id);
+        updateUserVo.setRoleIds(roleIds);
+        return updateUserVo;
+    }
+
     private boolean userNameExit(String userName){
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getUserName,userName);
@@ -72,6 +125,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(User::getEmail,email);
         return count(queryWrapper) > 0;
+    }
+    private boolean phoneExit(String phone){
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getPhonenumber,phone);
+        return count(queryWrapper) > 0;
+    }
+
+    @Override
+    public ResponseResult<Object> updateUser(UserDto userDto) {
+        //待优化
+        User nowUser = getById(userDto.getId());
+        if (!nowUser.getUserName().equals(userDto.getUserName())&&userNameExit(userDto.getUserName()))
+            throw new BusinessException(HttpCodeEnum.USERNAME_EXIST);
+        if (!nowUser.getEmail().equals(userDto.getEmail())&&emailExit(userDto.getEmail()))
+            throw new BusinessException(HttpCodeEnum.EMAIL_EXIST);
+        User user=BeanCopyUtil.copyBean(userDto,User.class);
+        updateById(user);
+        baseMapper.deleteUserRole(user.getId());
+        baseMapper.insertUserRole(user.getId(),userDto.getRoleIds());
+        return ResponseResult.success();
     }
 }
 

@@ -7,6 +7,7 @@ import com.yozuru.domain.dto.RoleDto;
 import com.yozuru.domain.entity.Role;
 import com.yozuru.domain.vo.PageVo;
 import com.yozuru.domain.vo.RoleVo;
+import com.yozuru.domain.vo.SimpleRoleVo;
 
 import java.util.List;
 
@@ -37,5 +38,7 @@ public interface RoleService extends IService<Role> {
     ResponseResult<Object> updateRole(RoleDto roleDto);
 
     ResponseResult<Object> deleteRoleById(Long id);
+
+    ResponseResult<List<SimpleRoleVo>> getAllRole();
 }
 

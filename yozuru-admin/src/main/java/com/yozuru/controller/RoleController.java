@@ -6,6 +6,7 @@ import com.yozuru.domain.dto.RoleDto;
 import com.yozuru.domain.dto.RoleStatusDto;
 import com.yozuru.domain.vo.PageVo;
 import com.yozuru.domain.vo.RoleVo;
+import com.yozuru.domain.vo.SimpleRoleVo;
 import com.yozuru.service.RoleService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -46,5 +47,9 @@ public class RoleController {
     @DeleteMapping("/{id}")
     public ResponseResult<Object> deleteRole(@PathVariable Long id) {
         return roleService.deleteRoleById(id);
+    }
+    @GetMapping("/listAllRole")
+    public ResponseResult<List<SimpleRoleVo>> listAllRole() {
+        return roleService.getAllRole();
     }
 }

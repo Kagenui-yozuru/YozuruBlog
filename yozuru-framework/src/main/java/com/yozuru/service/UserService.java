@@ -2,10 +2,12 @@ package com.yozuru.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yozuru.domain.ResponseResult;
-import com.yozuru.domain.dto.RegisterDto;
-import com.yozuru.domain.dto.UpdateUserInfoDto;
+import com.yozuru.domain.dto.*;
 import com.yozuru.domain.entity.User;
+import com.yozuru.domain.vo.PageVo;
+import com.yozuru.domain.vo.UpdateUserVo;
 import com.yozuru.domain.vo.UserInfoVo;
+import com.yozuru.domain.vo.UserListVo;
 
 /**
  * 用户表(User)表服务接口
@@ -21,5 +23,15 @@ public interface UserService extends IService<User> {
     ResponseResult<Object> updateUserInfo(UpdateUserInfoDto userInfoDto);
 
     ResponseResult<Object> register(RegisterDto registerDto);
+
+    ResponseResult<PageVo<UserListVo>> getUserListByPage(QueryUserDto queryUserDto, PageDto pageDto);
+
+    ResponseResult<Object> addUser(UserDto userDto);
+
+    ResponseResult<Object> deleteUserById(Long id);
+
+    UpdateUserVo getUserInfoById(Long id);
+
+    ResponseResult<Object> updateUser(UserDto userDto);
 }
 
