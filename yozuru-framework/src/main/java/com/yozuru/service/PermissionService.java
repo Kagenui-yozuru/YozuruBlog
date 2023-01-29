@@ -14,5 +14,5 @@ public interface PermissionService {
      * @param permission 要判断的权限
      * @return true:具有  false:不具有
      */
-    boolean hasPermission(String permission);
+    boolean hasPermission(String... permission);
 }

@@ -7,6 +7,7 @@ import com.yozuru.domain.vo.PageVo;
 import com.yozuru.domain.vo.backstage.TagVo;
 import com.yozuru.service.backstage.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/content/tag")
+@PreAuthorize("@ps.hasPermission('content:tag:index')")
 public class TagController {
     @Autowired
     private TagService tagService;
@@ -32,6 +34,7 @@ public class TagController {
     }
 
     @GetMapping("/listAllTag")
+    @PreAuthorize("@ps.hasPermission('content:article:writer')")
     public ResponseResult<List<TagVo>> listAllTag() {
         return tagService.getAllTag();
     }

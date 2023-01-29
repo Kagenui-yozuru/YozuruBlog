@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.constants.SystemConstant;
 import com.yozuru.domain.dto.PageDto;
+import com.yozuru.domain.dto.backstage.CategoryDto;
 import com.yozuru.domain.dto.backstage.QueryCategoryDto;
 import com.yozuru.domain.entity.Article;
 import com.yozuru.domain.vo.PageVo;
@@ -16,7 +17,6 @@ import com.yozuru.mapper.CategoryMapper;
 import com.yozuru.domain.entity.Category;
 import com.yozuru.service.CategoryService;
 import com.yozuru.utils.BeanCopyUtil;
-import io.jsonwebtoken.lang.Objects;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +80,33 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         List<CategoryListVo> categoryListVos = BeanCopyUtil.copyBeanList(categoryList, CategoryListVo.class);
         PageVo<CategoryListVo> pageVo = new PageVo<>(categoryListVos, categoryPage.getTotal());
         return ResponseResult.success(pageVo);
+    }
+
+    @Override
+    public ResponseResult<Object> addCategory(CategoryDto categoryDto) {
+        Category category = BeanCopyUtil.copyBean(categoryDto, Category.class);
+        save(category);
+        return ResponseResult.success();
+    }
+
+    @Override
+    public ResponseResult<CategoryDto> getCategoryById(Integer id) {
+        Category category = getById(id);
+        CategoryDto categoryDto = BeanCopyUtil.copyBean(category, CategoryDto.class);
+        return ResponseResult.success(categoryDto);
+    }
+
+    @Override
+    public ResponseResult<Object> deleteCategory(Long id) {
+        removeById(id);
+        return ResponseResult.success();
+    }
+
+    @Override
+    public ResponseResult<Object> updateCategory(CategoryDto categoryDto) {
+        Category category = BeanCopyUtil.copyBean(categoryDto, Category.class);
+        updateById(category);
+        return ResponseResult.success();
     }
 }
 

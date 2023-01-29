@@ -52,6 +52,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         if (menuIds != null && menuIds.size() > 0) {
             baseMapper.deleteRoleMenuByRoleId(role.getId());
             baseMapper.insertRoleMenu(menuIds, role.getId());
+        }else {
+            baseMapper.deleteRoleMenuByRoleId(role.getId());
         }
         return ResponseResult.success();
     }

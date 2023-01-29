@@ -60,8 +60,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 .eq(Article::getStatus, SystemConstant.ARTICLES_STATUS_NORMAL)
                 .orderByDesc(Article::getViewCount)
                 .last("limit "+SystemConstant.HOT_ARTICLES_LIST_SIZE);
-
-
         List<Article> list = list(queryWrapper);
         List<HotArticlesVo> hotArticlesVos = BeanCopyUtil.copyBeanList(list, HotArticlesVo.class);
         hotArticlesVos.forEach(hotArticlesVo ->

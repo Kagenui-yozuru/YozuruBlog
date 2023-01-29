@@ -11,6 +11,7 @@ import com.yozuru.domain.vo.backstage.UserVo;
 import com.yozuru.service.backstage.RoleService;
 import com.yozuru.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,21 +30,25 @@ public class UserController {
     private RoleService roleService;
 
     @GetMapping("/list")
+    @PreAuthorize("@ps.hasPermission('system:user:query')")
     public ResponseResult<PageVo<UserVo>> getUserList(PageDto pageDto, QueryUserDto queryUserDto){
         return userService.getUserListByPage(queryUserDto,pageDto);
     }
 
     @PostMapping
+    @PreAuthorize("@ps.hasPermission('system:user:add')")
     public ResponseResult<Object> addUser(@RequestBody UserDto userDto){
         return userService.addUser(userDto);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("@ps.hasPermission('system:user:remove')")
     public ResponseResult<Object> deleteUser(@PathVariable Long id){
         return userService.deleteUserById(id);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("@ps.hasPermission('system:user:edit')")
     public ResponseResult<UpdateUserVo> getUserInfo(@PathVariable Long id){
         UpdateUserVo userVo = userService.getUserInfoById(id);
         ResponseResult<List<SimpleRoleVo>> roles = roleService.getAllRole();
@@ -51,6 +56,7 @@ public class UserController {
         return ResponseResult.success(userVo);
     }
     @PutMapping
+    @PreAuthorize("@ps.hasPermission('system:user:edit')")
     public ResponseResult<Object> updateUserInfo(@RequestBody UserDto userDto){
         return userService.updateUser(userDto);
     }
