@@ -5,14 +5,11 @@ spring:
     active: dev
   main:
     banner-mode: off
-
+  servlet:
+    multipart:
+      max-file-size: 2MB
 
 logging:
   level:
     root: info
 
-oss:
-  accessKey: Uo2PmhiUHzoerPzTm19ssMzebGr0BheLxgW4ogVd
-  secretKey: S3_BVGL8-HRSBspDpSZWaSxsZqtQ9KlxHSVxTs3j
-  bucket: yozuru-blog
-  cdn: http://rp8pn117j.hb-bkt.clouddn.com
