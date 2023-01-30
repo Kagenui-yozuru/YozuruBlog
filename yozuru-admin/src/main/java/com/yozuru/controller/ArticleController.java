@@ -9,6 +9,7 @@ import com.yozuru.domain.vo.PageVo;
 import com.yozuru.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,7 +24,7 @@ public class ArticleController {
 
     @PostMapping
     @PreAuthorize("@ps.hasPermission('content:article:writer')")
-    public ResponseResult<Object> addArticle(@RequestBody ArticleDto articleDto) {
+    public ResponseResult<Object> addArticle(@RequestBody @Validated(ArticleDto.Add.class) ArticleDto articleDto) {
         return articleService.addArticle(articleDto);
     }
 
@@ -41,7 +42,7 @@ public class ArticleController {
 
     @PutMapping
     @PreAuthorize("@ps.hasPermission('content:article:writer')")
-    public ResponseResult<Object> updateArticle(@RequestBody ArticleDto articleDto) {
+    public ResponseResult<Object> updateArticle(@RequestBody @Validated(ArticleDto.Update.class)ArticleDto articleDto) {
         return articleService.updateArticle(articleDto);
     }
 

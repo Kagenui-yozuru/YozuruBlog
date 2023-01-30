@@ -105,6 +105,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    @Transactional
     public ResponseResult<Object> deleteUserById(Long id) {
         removeById(id);
         baseMapper.deleteUserRole(id);
@@ -139,6 +140,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResponseResult<Object> updateUser(UserDto userDto) {
         //待优化
         User nowUser = getById(userDto.getId());

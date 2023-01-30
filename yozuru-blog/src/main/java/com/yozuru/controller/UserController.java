@@ -9,6 +9,7 @@ import com.yozuru.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -37,7 +38,7 @@ public class UserController {
     @SystemLog(businessName = "用户注册")
     @ApiOperation("用户注册")
     @PostMapping("/register")
-    public ResponseResult<Object> register(@RequestBody RegisterDto registerDto){
+    public ResponseResult<Object> register(@RequestBody @Validated RegisterDto registerDto){
         return userService.register(registerDto);
     }
 }

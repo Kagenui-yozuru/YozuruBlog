@@ -59,6 +59,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
+    @Transactional
     public ResponseResult<Object> deleteRoleById(Long id) {
         if (id == SystemConstant.ADMIN_ID) {
             return ResponseResult.errorResult(HttpCodeEnum.CAN_NOT_DELETE_ADMIN);
@@ -90,7 +91,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-
     public ResponseResult<Object> updateStatus(Long roleId, String status) {
         Role role = getById(roleId);
         if (Objects.isNull(role)) {
@@ -102,6 +102,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
+    @Transactional
     public ResponseResult<Object> addRole(RoleDto roleDto) {
         Role role = BeanCopyUtil.copyBean(roleDto, Role.class);
         save(role);
@@ -113,7 +114,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public ResponseResult<RoleVo> getRoleById(Long id) {
         Role role = getById(id);
         if (Objects.isNull(role)) {

@@ -2,12 +2,14 @@ package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.PageDto;
+import com.yozuru.domain.dto.backstage.RoleDto;
 import com.yozuru.domain.dto.backstage.TagDto;
 import com.yozuru.domain.vo.PageVo;
 import com.yozuru.domain.vo.backstage.TagVo;
 import com.yozuru.service.backstage.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,7 +42,7 @@ public class TagController {
     }
 
     @PostMapping
-    public ResponseResult<Object> addTag(@RequestBody TagDto tagDto) {
+    public ResponseResult<Object> addTag(@RequestBody @Validated(TagDto.Add.class) TagDto tagDto) {
         return tagService.addTag(tagDto);
     }
 
@@ -50,7 +52,7 @@ public class TagController {
     }
 
     @PutMapping
-    public ResponseResult<Object> update(@RequestBody TagDto tagDto) {
+    public ResponseResult<Object> update(@RequestBody @Validated(TagDto.Update.class) TagDto tagDto) {
         return tagService.updateTag(tagDto);
     }
 }

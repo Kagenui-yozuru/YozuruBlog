@@ -12,6 +12,7 @@ import com.yozuru.service.backstage.RoleService;
 import com.yozuru.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("@ps.hasPermission('system:user:add')")
-    public ResponseResult<Object> addUser(@RequestBody UserDto userDto){
+    public ResponseResult<Object> addUser(@RequestBody @Validated(UserDto.Add.class) UserDto userDto){
         return userService.addUser(userDto);
     }
 
@@ -57,7 +58,7 @@ public class UserController {
     }
     @PutMapping
     @PreAuthorize("@ps.hasPermission('system:user:edit')")
-    public ResponseResult<Object> updateUserInfo(@RequestBody UserDto userDto){
+    public ResponseResult<Object> updateUserInfo(@RequestBody @Validated(UserDto.Update.class) UserDto userDto){
         return userService.updateUser(userDto);
     }
 }

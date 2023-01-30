@@ -48,12 +48,14 @@ public class AdminLoginController {
         }
         return loginService.login(loginDto);
     }
+
     @SystemLog(businessName = "管理员用户登出")
     @ApiOperation("管理员用户登出")
     @PostMapping("/admin/logout")
     public ResponseResult<Object> logout(){
         return loginService.loginOut();
     }
+
     @GetMapping("/getInfo")
     @SystemLog(businessName = "获取管理员用户信息")
     @ApiOperation("获取该管理员用户信息(基本信息、权限信息、角色信息)")

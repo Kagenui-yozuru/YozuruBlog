@@ -33,7 +33,7 @@ public class CommentController {
     @SystemLog(businessName = "添加评论")
     @ApiOperation("发布评论，需要传递token")
     @PostMapping
-    public ResponseResult<Object> addComment(@RequestBody AddCommentDto addCommentDto){
+    public ResponseResult<Object> addComment(@RequestBody @Validated AddCommentDto addCommentDto){
         return commentService.addCommentList(addCommentDto);
     }
 }

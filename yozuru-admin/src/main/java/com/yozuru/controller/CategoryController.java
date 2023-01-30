@@ -11,6 +11,7 @@ import com.yozuru.domain.vo.forestage.CategoryVo;
 import com.yozuru.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,7 +39,7 @@ public class CategoryController {
         return categoryService.listCategoryByPage(pageDto, queryCategoryDto);
     }
     @PostMapping
-    public ResponseResult<Object> addCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseResult<Object> addCategory(@RequestBody @Validated({CategoryDto.Add.class}) CategoryDto categoryDto) {
         return categoryService.addCategory(categoryDto);
     }
 
@@ -48,7 +49,7 @@ public class CategoryController {
     }
 
     @PutMapping
-    public ResponseResult<Object> updateCategory(@RequestBody CategoryDto categoryDto) {
+    public ResponseResult<Object> updateCategory(@RequestBody @Validated({CategoryDto.Update.class})CategoryDto categoryDto) {
         return categoryService.updateCategory(categoryDto);
     }
     @DeleteMapping("/{id}")

@@ -17,7 +17,7 @@ import java.util.List;
  * @author Yozuru
  * @since 2022-12-02 17:24:29
  */
-@Validated
+
 public interface TagService extends IService<Tag> {
     /**
      * 分页查询标签列表
@@ -37,7 +37,7 @@ public interface TagService extends IService<Tag> {
      * @param tagDto 标签信息
      * @return 添加结果
      */
-    @Validated(TagDto.Add.class)
+
     ResponseResult<Object> addTag(TagDto tagDto);
 
     /**
@@ -53,7 +53,7 @@ public interface TagService extends IService<Tag> {
      * @param tagDto 标签信息
      * @return 修改结果
      */
-    @Validated(TagDto.Edit.class)
+
     ResponseResult<Object> updateTag(TagDto tagDto);
 
     /**

@@ -11,6 +11,7 @@ import io.jsonwebtoken.lang.Strings;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +28,7 @@ public class BlogLoginController {
     @SystemLog(businessName = "用户登录")
     @ApiOperation("用户登录")
     @PostMapping("/login")
-    public ResponseResult<UserLoginVo> login(@RequestBody LoginDto loginDto){
+    public ResponseResult<UserLoginVo> login(@RequestBody @Validated LoginDto loginDto){
         if (!Strings.hasText(loginDto.getUserName())){
             throw new BusinessException(HttpCodeEnum.REQUIRE_USERNAME);
         }

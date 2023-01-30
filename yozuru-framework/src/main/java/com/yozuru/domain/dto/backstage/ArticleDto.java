@@ -36,7 +36,6 @@ public class ArticleDto {
     @NotNull(message = "所属分类不能为空")
     private Long categoryId;
     //缩略图
-    @Pattern(regexp = "^http://rninhqsaw.hb-bkt.clouddn.com",message = "图片地址格式不正确")
     private String thumbnail;
     //是否置顶（0否，1是）
     @Pattern(regexp = "[0,1]",message = "置顶状态不正确")

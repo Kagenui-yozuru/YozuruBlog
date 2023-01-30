@@ -2,6 +2,7 @@ package com.yozuru.controller;
 
 import com.yozuru.domain.ResponseResult;
 import com.yozuru.domain.dto.PageDto;
+import com.yozuru.domain.dto.backstage.CategoryDto;
 import com.yozuru.domain.dto.backstage.RoleDto;
 import com.yozuru.domain.dto.backstage.RoleStatusDto;
 import com.yozuru.domain.vo.PageVo;
@@ -10,6 +11,7 @@ import com.yozuru.domain.vo.backstage.SimpleRoleVo;
 import com.yozuru.service.backstage.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class RoleController {
     }
     @PostMapping
     @PreAuthorize("@ps.hasPermission('system:role:add')")
-    public ResponseResult<Object> addRole(@RequestBody RoleDto roleDto) {
+    public ResponseResult<Object> addRole(@RequestBody @Validated(RoleDto.Add.class)RoleDto roleDto) {
         return roleService.addRole(roleDto);
     }
     @GetMapping("/{id}")
@@ -45,7 +47,7 @@ public class RoleController {
     }
     @PutMapping
     @PreAuthorize("@ps.hasPermission('system:role:edit')")
-    public ResponseResult<Object> updateRole(@RequestBody RoleDto roleDto) {
+    public ResponseResult<Object> updateRole(@RequestBody @Validated(RoleDto.Update.class)RoleDto roleDto) {
         return roleService.updateRole(roleDto);
     }
     @DeleteMapping("/{id}")
