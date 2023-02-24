@@ -51,7 +51,7 @@ public class AdminLoginController {
 
     @SystemLog(businessName = "管理员用户登出")
     @ApiOperation("管理员用户登出")
-    @PostMapping("/admin/logout")
+    @GetMapping("/admin/logout")
     public ResponseResult<Object> logout(){
         return loginService.loginOut();
     }
